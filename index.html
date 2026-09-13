@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Ace — Luxury Fashion</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+
+  <body>
+    <!-- =========================
+         OFFER BAR
+    ========================== -->
+
+    <div class="offer-bar">
+      <p>
+        Get 10% off your first order.
+        <span>Code : 10FIRST</span>
+        <small>(T&Cs apply)</small>
+      </p>
+    </div>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <header class="navbar">
+      <!-- Search -->
+      <div class="nav-left">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+
+          <input type="text" id="searchInput" placeholder="Search" />
+        </div>
+      </div>
+
+      <!-- Logo -->
+      <div class="logo">ACE</div>
+
+      <!-- Icons -->
+      <div class="nav-right">
+        <a
+          class="nav-icon"
+          data-account
+          href="./pages/login.html"
+          aria-label="My Account"
+        >
+          <i class="fa-regular fa-user"></i>
+          <span>My Account</span>
+        </a>
+
+        <button class="nav-icon" aria-label="Favorites">
+          <i class="fa-regular fa-heart"></i>
+          <span>Favorites</span>
+        </button>
+
+        <a
+          class="nav-icon cart-button"
+          href="./pages/cart.html"
+          aria-label="Cart"
+        >
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span>Cart</span>
+          <b id="cartCount">0</b>
+        </a>
+      </div>
+    </header>
+
+    <!-- Navigation Links -->
+
+    <nav class="main-nav">
+      <a href="#about">About</a>
+      <a href="#collections">Collections</a>
+      <a href="#contact">Contact</a>
+      <a href="#products">Products</a>
+      <a href="#shop">Shop</a>
+    </nav>
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero">
+      <div class="hero-video">
+        <iframe
+          src="https://www.youtube.com/embed/GsyTVrbgfYI?autoplay=1&mute=1&loop=1&playlist=GsyTVrbgfYI&controls=0&showinfo=0&rel=0&modestbranding=1"
+          title="Dior Men Winter 2025-2026 Show"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+        >
+        </iframe>
+      </div>
+
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <h1>ACE</h1>
+
+        <p>
+          A curated world of exceptional fashion, timeless pieces and
+          contemporary luxury.
+        </p>
+
+        <a href="#collections" class="hero-button"> Discover Collection </a>
+      </div>
+    </section>
+
+    <!-- =========================
+         FEATURES
+    ========================== -->
+
+    <section class="features" id="about">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fa-regular fa-gem"></i>
+        </div>
+
+        <div class="feature-content">
+          <h3>Exclusive designers and pieces</h3>
+
+          <p>Dior, Celine, emerging talent...</p>
+
+          <a href="#collections">
+            Discover
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fa-solid fa-globe"></i>
+        </div>
+
+        <div class="feature-content">
+          <h3>Free delivery and returns*</h3>
+
+          <p>Simple and easy, in 100+ countries/regions.</p>
+
+          <a href="#shipping">
+            *View conditions
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fa-regular fa-star"></i>
+        </div>
+
+        <div class="feature-content">
+          <h3>Ultimates</h3>
+
+          <p>Rare editions from iconic brands.</p>
+
+          <a href="#collections">
+            Discover
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         SELECTED FOR YOU
+    ========================== -->
+
+    <section class="products-section" id="products">
+      <div class="section-heading">
+        <span>ACE EDIT</span>
+
+        <h2>Selected for you</h2>
+
+        <a href="#shop">
+          View all
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="products-grid">
+        <!-- Product 1 -->
+
+        <article class="product-card">
+          <div class="product-image">
+            <img
+              class="image-primary"
+              src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=900&q=85"
+              alt="Luxury handbag"
+            />
+
+            <img
+              class="image-hover"
+              src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85"
+              alt="Luxury handbag alternate view"
+            />
+
+            <button class="favorite-button">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+
+            <button class="quick-add" data-product="Luxury Handbag">
+              Quick Add
+            </button>
+          </div>
+
+          <div class="product-info">
+            <div>
+              <h3>Luxury Handbag</h3>
+              <p>Iconic Collection</p>
+            </div>
+
+            <span>EGP 48,500</span>
+          </div>
+        </article>
+
+        <!-- Product 2 -->
+
+        <article class="product-card">
+          <div class="product-image">
+            <img
+              class="image-primary"
+              src="https://images.unsplash.com/photo-1591561954557-26941169b49e?auto=format&fit=crop&w=900&q=85"
+              alt="Designer shoes"
+            />
+
+            <img
+              class="image-hover"
+              src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=85"
+              alt="Designer shoes alternate view"
+            />
+
+            <button class="favorite-button">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+
+            <button class="quick-add" data-product="Designer Shoes">
+              Quick Add
+            </button>
+          </div>
+
+          <div class="product-info">
+            <div>
+              <h3>Designer Shoes</h3>
+              <p>New Season</p>
+            </div>
+
+            <span>EGP 32,900</span>
+          </div>
+        </article>
+
+        <!-- Product 3 -->
+
+        <article class="product-card">
+          <div class="product-image">
+            <img
+              class="image-primary"
+              src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=900&q=85"
+              alt="Designer clothing"
+            />
+
+            <img
+              class="image-hover"
+              src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=900&q=85"
+              alt="Designer clothing alternate view"
+            />
+
+            <button class="favorite-button">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+
+            <button class="quick-add" data-product="Designer Collection">
+              Quick Add
+            </button>
+          </div>
+
+          <div class="product-info">
+            <div>
+              <h3>Designer Collection</h3>
+              <p>Exclusive Edit</p>
+            </div>
+
+            <span>EGP 26,700</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================
+         NEW ARRIVALS
+    ========================== -->
+
+    <section class="products-section new-arrivals">
+      <div class="section-heading">
+        <span>JUST IN</span>
+
+        <h2>New Arrivals</h2>
+
+        <a href="#shop">
+          View all
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="products-grid">
+        <!-- Product 1 -->
+
+        <article class="product-card">
+          <div class="product-image">
+            <img
+              class="image-primary"
+              src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=900&q=85"
+              alt="New arrival fashion"
+            />
+
+            <img
+              class="image-hover"
+              src="https://images.unsplash.com/photo-1506629905607-d9c36e6f1e5b?auto=format&fit=crop&w=900&q=85"
+              alt="New arrival alternate view"
+            />
+
+            <button class="favorite-button">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+
+            <button class="quick-add" data-product="New Arrival One">
+              Quick Add
+            </button>
+          </div>
+
+          <div class="product-info">
+            <div>
+              <h3>Silk Evening Dress</h3>
+              <p>New Arrival</p>
+            </div>
+
+            <span>EGP 41,200</span>
+          </div>
+        </article>
+
+        <!-- Product 2 -->
+
+        <article class="product-card">
+          <div class="product-image">
+            <img
+              class="image-primary"
+              src="https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=900&q=85"
+              alt="Luxury jacket"
+            />
+
+            <img
+              class="image-hover"
+              src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=85"
+              alt="Luxury jacket alternate view"
+            />
+
+            <button class="favorite-button">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+
+            <button class="quick-add" data-product="Luxury Jacket">
+              Quick Add
+            </button>
+          </div>
+
+          <div class="product-info">
+            <div>
+              <h3>Tailored Jacket</h3>
+              <p>Maison Edit</p>
+            </div>
+
+            <span>EGP 37,800</span>
+          </div>
+        </article>
+
+        <!-- Product 3 -->
+
+        <article class="product-card">
+          <div class="product-image">
+            <img
+              class="image-primary"
+              src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=85"
+              alt="Luxury fashion"
+            />
+
+            <img
+              class="image-hover"
+              src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=900&q=85"
+              alt="Luxury fashion alternate view"
+            />
+
+            <button class="favorite-button">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+
+            <button class="quick-add" data-product="Luxury Fashion">
+              Quick Add
+            </button>
+          </div>
+
+          <div class="product-info">
+            <div>
+              <h3>Classic Outerwear</h3>
+              <p>New Season</p>
+            </div>
+
+            <span>EGP 29,500</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================
+         DIVIDER IMAGE
+    ========================== -->
+
+    <section class="visual-divider">
+      <img
+        src="https://j.top4top.io/p_39070c4be1.png"
+        alt="Ace Parisian collection"
+      />
+
+      <div class="divider-overlay">
+        <span>THE WORLD OF ACE</span>
+
+        <h2>Paris, Reimagined</h2>
+      </div>
+    </section>
+
+    <!-- =========================
+         PARISIAN EDIT
+    ========================== -->
+
+    <section class="products-section parisian-edit" id="collections">
+      <div class="section-heading">
+        <span>PARISIAN EDIT</span>
+
+        <h2>Parisian edit</h2>
+
+        <a href="#shop">
+          View all
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="products-grid four-products">
+        <!-- Product 1 -->
+
+        <article class="product-card">
+          <div class="product-image">
+            <img
+              class="image-primary"
+              src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=85"
+              alt="Parisian fashion"
+            />
+
+            <img
+              class="image-hover"
+              src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=800&q=85"
+              alt="Parisian fashion alternate view"
+            />
+
+            <button class="favorite-button">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+
+            <button class="quick-add" data-product="Parisian Dress">
+              Quick Add
+            </button>
+          </div>
+
+          <div class="product-info">
+            <div>
+              <h3>Parisian Dress</h3>
+              <p>Paris Edit</p>
+            </div>
+
+            <span>EGP 34,500</span>
+          </div>
+        </article>
+
+        <!-- Product 2 -->
+
+        <article class="product-card">
+          <div class="product-image">
+            <img
+              class="image-primary"
+              src="https://images.unsplash.com/photo-1496217590455-aa63a8350eea?auto=format&fit=crop&w=800&q=85"
+              alt="Parisian menswear"
+            />
+
+            <img
+              class="image-hover"
+              src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=85"
+              alt="Parisian menswear alternate view"
+            />
+
+            <button class="favorite-button">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+
+            <button class="quick-add" data-product="Parisian Suit">
+              Quick Add
+            </button>
+          </div>
+
+          <div class="product-info">
+            <div>
+              <h3>Parisian Suit</h3>
+              <p>Tailoring</p>
+            </div>
+
+            <span>EGP 52,000</span>
+          </div>
+        </article>
+
+        <!-- Product 3 -->
+
+        <article class="product-card">
+          <div class="product-image">
+            <img
+              class="image-primary"
+              src="https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=800&q=85"
+              alt="Parisian handbag"
+            />
+
+            <img
+              class="image-hover"
+              src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=800&q=85"
+              alt="Parisian handbag alternate view"
+            />
+
+            <button class="favorite-button">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+
+            <button class="quick-add" data-product="Parisian Bag">
+              Quick Add
+            </button>
+          </div>
+
+          <div class="product-info">
+            <div>
+              <h3>Parisian Bag</h3>
+              <p>Leather Goods</p>
+            </div>
+
+            <span>EGP 44,900</span>
+          </div>
+        </article>
+
+        <!-- Product 4 -->
+
+        <article class="product-card">
+          <div class="product-image">
+            <img
+              class="image-primary"
+              src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=800&q=85"
+              alt="Parisian shoes"
+            />
+
+            <img
+              class="image-hover"
+              src="https://images.unsplash.com/photo-1560343090-f0409e92791a?auto=format&fit=crop&w=800&q=85"
+              alt="Parisian shoes alternate view"
+            />
+
+            <button class="favorite-button">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+
+            <button class="quick-add" data-product="Parisian Shoes">
+              Quick Add
+            </button>
+          </div>
+
+          <div class="product-info">
+            <div>
+              <h3>Parisian Shoes</h3>
+              <p>Footwear</p>
+            </div>
+
+            <span>EGP 27,900</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================
+         NEWSLETTER
+    ========================== -->
+
+    <section class="newsletter">
+      <div class="newsletter-content">
+        <span>STAY IN THE KNOW</span>
+
+        <h2>The Ace world,<br />in your inbox.</h2>
+
+        <p>Discover new arrivals, exclusive pieces and the latest from Ace.</p>
+
+        <form id="newsletterForm">
+          <input
+            type="email"
+            id="emailInput"
+            placeholder="Your email address"
+            required
+          />
+
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="footer" id="contact">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">ACE</div>
+
+          <p>
+            Ace is a proud member of the Louis Vuitton Moët Hennessy (LVMH)
+            group.
+          </p>
+        </div>
+
+        <div class="footer-column">
+          <h4>Customer service</h4>
+
+          <a href="#">Shipping and Returns</a>
+          <a href="#">FAQ</a>
+          <a href="#">Contact Us</a>
+          <a href="#">Personal Shopper</a>
+          <a href="#">V.I.C. Service</a>
+          <a href="#">Payment methods</a>
+        </div>
+
+        <div class="footer-column">
+          <h4>Ace</h4>
+
+          <a href="#">Who are we?</a>
+          <a href="#">Ace Services</a>
+          <a href="#">Careers</a>
+          <a href="#">Press & Partnerships</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Accessibility</a>
+        </div>
+
+        <div class="footer-column">
+          <h4>Country/region, language</h4>
+
+          <button class="footer-selector">
+            English
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+
+          <button class="footer-selector">
+            EGP
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+
+          <h4 class="follow-title">Follow us</h4>
+
+          <div class="social-links">
+            <a href="#" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+
+            <a href="#" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+
+            <a href="#" aria-label="Pinterest">
+              <i class="fa-brands fa-pinterest-p"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Ace. All rights reserved.</p>
+
+        <div>
+          <a href="#">Privacy</a>
+          <a href="#">Cookies</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- =========================
+         CART NOTIFICATION
+    ========================== -->
+
+    <div class="cart-notification" id="cartNotification">
+      <i class="fa-solid fa-check"></i>
+      <span>Added to cart</span>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="./js/store.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>

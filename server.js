@@ -1,0 +1,40 @@
+require('dotenv').config();
+const express = require('express');
+const Datastore = require('nedb-promises');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
+const path = require('path');
+const crypto = require('crypto');
+const app = express();
+const users = Datastore.create({ filename: path.join(__dirname, 'data', 'users.db'), autoload: true });
+const orders = Datastore.create({ filename: path.join(__dirname, 'data', 'orders.db'), autoload: true });
+users.ensureIndex({ fieldName: 'email', unique: true }).catch(console.error);
+const secret = process.env.JWT_SECRET || 'development-only-change-me';
+if (process.env.NODE_ENV === 'production' && !process.env.JWT_SECRET) throw new Error('JWT_SECRET must be set in production.');
+const allowedOrigins = (process.env.FRONTEND_ORIGINS || 'http://127.0.0.1:5500,http://localhost:5500').split(',').map(origin => origin.trim());
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (origin && allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  }
+  if (req.method === 'OPTIONS') return res.sendStatus(204);
+  next();
+});
+app.use(express.json({ limit: '100kb' })); app.use(cookieParser());
+const auth = (req, res, next) => { try { req.user = jwt.verify(req.cookies.ace_session || '', secret); next(); } catch { res.status(401).json({ error: 'Your session has expired. Please sign in again.' }); } };
+const publicUser = u => ({ id: u._id, name: u.name, email: u.email, createdAt: u.createdAt });
+const session = (res, u) => { const token = jwt.sign({ id: u._id, name: u.name, email: u.email }, secret, { expiresIn: '7d' }); res.cookie('ace_session', token, { httpOnly: true, sameSite: 'lax', secure: process.env.NODE_ENV === 'production', maxAge: 604800000 }); };
+app.post('/api/auth/register', async (req, res) => { try { const name = String(req.body.name || '').trim(), email = String(req.body.email || '').trim().toLowerCase(), password = String(req.body.password || ''), confirmPassword = String(req.body.confirmPassword || ''); if (name.length < 2 || name.length > 80) throw new Error('Please enter a name between 2 and 80 characters.'); if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error('Please enter a valid email address.'); if (password.length < 8) throw new Error('Password must be at least 8 characters.'); if (password !== confirmPassword) throw new Error('Passwords do not match.'); const user = await users.insert({ name, email, passwordHash: await bcrypt.hash(password, 12), createdAt: new Date().toISOString() }); session(res, user); res.status(201).json({ user: publicUser(user) }); } catch (e) { res.status(e.errorType === 'uniqueViolated' ? 409 : 400).json({ error: e.errorType === 'uniqueViolated' ? 'An account with this email already exists.' : e.message }); } });
+app.post('/api/auth/login', async (req, res) => { const user = await users.findOne({ email: String(req.body.email || '').trim().toLowerCase() }); if (!user || !(await bcrypt.compare(String(req.body.password || ''), user.passwordHash))) return res.status(401).json({ error: 'Incorrect email or password.' }); session(res, user); res.json({ user: publicUser(user) }); });
+app.post('/api/auth/logout', (req, res) => { res.clearCookie('ace_session', { httpOnly: true, sameSite: 'lax', secure: process.env.NODE_ENV === 'production' }); res.json({ ok: true }); });
+app.get('/api/auth/me', auth, async (req, res) => { const user = await users.findOne({ _id: req.user.id }); if (!user) return res.status(401).json({ error: 'Your session has expired. Please sign in again.' }); res.json({ user: publicUser(user) }); });
+app.get('/api/orders', auth, async (req, res) => { const list = await orders.find({ userId: req.user.id }).sort({ createdAt: -1 }); res.json({ orders: list }); });
+app.get('/api/orders/:orderNumber', auth, async (req, res) => { const order = await orders.findOne({ orderNumber: req.params.orderNumber, userId: req.user.id }); if (!order) return res.status(404).json({ error: 'Order not found.' }); res.json({ order }); });
+app.post('/api/orders', auth, async (req, res) => { const { items, address } = req.body; if (!Array.isArray(items) || !items.length) return res.status(400).json({ error: 'Your cart is empty.' }); const fields = ['fullName', 'line1', 'city', 'country', 'phone']; if (!address || fields.some(f => !String(address[f] || '').trim())) return res.status(400).json({ error: 'Please complete all required shipping details.' }); if (items.length > 50 || items.some(i => !i || !String(i.name || '').trim() || !Number.isFinite(Number(i.price)) || Number(i.price) < 0 || !Number.isInteger(Number(i.quantity)) || Number(i.quantity) < 1 || Number(i.quantity) > 20)) return res.status(400).json({ error: 'Your cart contains invalid items.' }); const safeItems = items.map(i => ({ name: String(i.name).slice(0, 120), price: Number(i.price), quantity: Number(i.quantity), image: String(i.image || '').slice(0, 500) })); const order = await orders.insert({ orderNumber: `ACE-${Date.now().toString(36).toUpperCase()}-${crypto.randomBytes(2).toString('hex').toUpperCase()}`, userId: req.user.id, items: safeItems, subtotal: safeItems.reduce((n, i) => n + i.price * i.quantity, 0), address: Object.fromEntries(Object.entries(address).map(([k, v]) => [k, String(v).trim().slice(0, 160)])), status: 'received', createdAt: new Date().toISOString() }); res.status(201).json({ order }); });
+app.use(express.static(__dirname));
+app.listen(process.env.PORT || 3000, () => console.log(`ACE store running at http://localhost:${process.env.PORT || 3000}`));
